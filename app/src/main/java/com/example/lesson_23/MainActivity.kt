@@ -3,6 +3,8 @@ package com.example.lesson_23
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
+//Темы: Корутины
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
