@@ -5,34 +5,21 @@
     android:layout_height="match_parent"
     tools:context=".FirstFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/imGPicture"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="First fragment" />
+        android:layout_height="360dp" />
+
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:id="@+id/btnCouritine"
-        android:text="Run Coroutine"/>
+        android:id="@+id/btnLoading"
+        android:layout_marginTop="50dp"
+        android:text="Loading IMG"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Text"
-        android:layout_marginTop="240px"
-        android:id="@+id/tvText"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Text2"
-        android:layout_gravity="center"
-        android:textSize="32dp"
-        android:layout_marginTop="70dp"
-        android:id="@+id/arrayText"
-        />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,13 +27,6 @@
         android:layout_marginTop="120dp"
         android:id="@+id/btnChangeText"
         android:text="Change Text"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="170dp"
-        android:id="@+id/btnClearText"
-        android:text="Clear Text"/>
 
 
 </FrameLayout>

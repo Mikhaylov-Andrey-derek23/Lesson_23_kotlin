@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.example.lesson_23.databinding.FragmentFirstBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,11 +22,6 @@ class FirstFragment : Fragment() {
 
     private  var bidding: FragmentFirstBinding? = null
 
-    private  val arrayText: List<String> = listOf(
-        "Text ver 1",
-        "Text ver 2",
-        "Text ver 3"
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,47 +38,30 @@ class FirstFragment : Fragment() {
 
     private fun setOnClickOnListeners() {
 
-
         bidding?.btnChangeText?.setOnClickListener {
-            val result = CoroutineScope(Dispatchers.IO).async {
-                handlerChangeText(true)
+            CoroutineScope(Dispatchers.Main).launch{
+                bidding?.btnChangeText?.text = "It's Kotlin!"
             }
-           CoroutineScope(Dispatchers.Main).launch {
-               bidding?.arrayText?.text = result.await()
-           }
         }
 
-        bidding?.btnClearText?.setOnClickListener {
-            bidding?.arrayText?.text = handlerChangeText(false)
+        bidding?.btnLoading?.setOnClickListener {
+            val result = CoroutineScope(Dispatchers.IO).async {
+                loadingImg()
+            }
+            CoroutineScope(Dispatchers.Main).launch {
+                Glide.with(requireContext())
+                    .load(result.await())
+                    .into(bidding!!.imGPicture)
+
+            }
         }
 
-       bidding?.btnCouritine?.setOnClickListener {
 
-          val deferredSomeResult = CoroutineScope(Dispatchers.IO).async {
-              getSomeResult()
-          }
+    }
 
-           CoroutineScope(Dispatchers.Main).launch {
-               Log.e("Couroutines", "getSomeresylt : ${deferredSomeResult.await()}")
-               bidding?.tvText?.text = deferredSomeResult.await()
-           }
-
-           CoroutineScope(Dispatchers.IO).launch {
-               //выполняет в новым потоке
-//             for (i in 0 ..1000){
-//                 delay(1000)
-//                 Handler(Looper.getMainLooper()).postDelayed({
-//
-//                 }, 1000)
-//                 Log.e("Couroutines", "i equals ${i}")
-//
-//             }
-//               while (true){
-//                   Log.e("Couroutines", "i equals")
-//               }
-           }
-
-       }
+    private fun loadingImg():String{
+        Thread.sleep(2500)
+        return "https://cdn.mos.cms.futurecdn.net/s2RT5ASNjHeV2Eowgu4J3U-1920-80.jpg"
     }
 
     private  fun getSomeResult():String {
@@ -90,14 +69,16 @@ class FirstFragment : Fragment() {
         return "Timer start"
     }
 
-    private  fun handlerChangeText(flag:Boolean):String{
-        return if(flag){
-            Thread.sleep(2500)
-            arrayText.random().toString()
-        }else{
-
-            ""
-        }
-    }
+//    private  fun handlerChangeText(flag:Boolean):String{
+//        return if(flag){
+//            Thread.sleep(2500)
+//            arrayText.random().toString()
+//        }else{
+//
+//            ""
+//        }
+//    }
 }
+
+
 
